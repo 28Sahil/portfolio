@@ -1,41 +1,49 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'kadu.sahil.mail@gmail.com';
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-     die( 'Unable to load the "PHP Email Form" Library!');
-  }
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
+
+
+    if(isset($_POST['submit_contact']))  
+    {
+      $subject = htmlentities($_POST['subject']);
+      $name = htmlentities($_POST['name']);
+      $email = htmlentities($_POST['email']);
+      $message = htmlentities($_POST['message']);
   
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
-
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
+      $mail = new PHPMailer(true);
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = 'kadu.sahil.mail@gmail.com';
+      $mail->Password = 'vxeopbktsfpalert';
+      $mail->Port = 465;
+      $mail->SMTPSecure = 'ssl';
+      $mail->isHTML(true);
+      $mail->setFrom($email, $name);
+      $mail->addAddress('kadu.sahil.mail@gmail.com');
+      $mail->Subject = ("$email ($subject)");
+      $mail->Body = $message;
+      $mail->send();
   
-  $contact->smtp = array(
-    'host' => 'smtp.gmail.com',
-    'username' => 'kadu.sahil.mail@gmail.com',
-    'password' => 'vxeopbktsfpalert',
-    'port' => '587'
-  );
-  
-
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
+       if(!$mail->send()) {
+            $msg = "Error while sending email";
+            $msgclass = 'bg-danger';
+            header("Location:../index.html");
+            die();    
+       } 
+       else {
+          $msg = 'A mail with recovery instruction has sent to your email.';
+          $msgclass = 'bg-success';
+          header("Location:../index.html");
+       }     
+    }
 ?>
+
