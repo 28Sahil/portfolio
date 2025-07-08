@@ -318,32 +318,133 @@ h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
+.hero-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap; /* makes it stack on small screens */
+}
+
+.hero-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-right {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+#hero h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: #45505b;
+  transform: translateZ(100px);
+  opacity: 1;
+  animation: floatTitle 5s ease-in-out infinite alternate;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  background-color: #dddddd;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.eye {
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50px;
+}
+
+.eye.left { left: 35px; }
+.eye.right { right: 35px; }
+
+.pupil {
+  width: 12px;
+  height: 12px;
+  background-color: #000000;
+  border-radius: 50%;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  transition: transform 0.1s linear;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  .hero-split {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #hero h1 {
+    font-size: 36px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
+
 /* Base Styles */
+
+#hero h1 {
+  opacity: 1; /* Show immediately */
+  animation: none; /* Remove animation delay and fade-in */
+  margin: 0;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #45505b;
+  transform: translateZ(100px);
+}
+
 #hero {
   width: 100%;
   height: 100vh;
   background: url("../img/hero-bg.jpg") top right no-repeat;
   background-size: cover;
   position: relative;
-  perspective: 1000px; /* Add perspective for 3D effect */
+  perspective: 1200px;
+  overflow: hidden;
 }
 
-#hero:before {
+#hero::before {
   content: "";
   background: rgba(255, 255, 255, 0.8);
   position: absolute;
-  bottom: 0;
   top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  transform: translateZ(-1px) scale(1.5); /* Create a background layer effect */
+  transform: translateZ(-400px) scale(2.5);
+  z-index: 1;
 }
 
-/* Text Animation */
-#hero h1, #hero p {
-  transform: translateZ(50px); /* Add depth to text elements */
+#hero .container {
+  position: relative;
+  z-index: 2;
+  transform-style: preserve-3d;
+}
+
+#hero h1, 
+#hero p {
   opacity: 0;
-  animation: fadeInUp 1s forwards; /* Add fade-in and up animation */
+  animation: fadeInUp 1s forwards;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #hero h1 {
@@ -352,7 +453,8 @@ h6 {
   font-weight: 700;
   line-height: 56px;
   color: #45505b;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for more depth */
+  transform: translateZ(100px);
+  animation: fadeInUp 1s forwards, floatTitle 5s ease-in-out infinite alternate;
 }
 
 #hero p {
@@ -360,6 +462,8 @@ h6 {
   margin: 15px 0 0 0;
   font-size: 26px;
   font-family: "Poppins", sans-serif;
+  transform: translateZ(70px);
+  animation: fadeInUp 1s forwards, floatSub 6s ease-in-out infinite alternate;
 }
 
 #hero p span {
@@ -367,29 +471,26 @@ h6 {
   letter-spacing: 1px;
 }
 
-/* Social Links Animation */
 #hero .social-links {
   margin-top: 30px;
-  transform: translateZ(30px); /* Add depth to social links */
   opacity: 0;
-  animation: fadeInUp 1s 0.5s forwards; /* Add fade-in and up animation with delay */
+  animation: fadeInUp 1s 0.5s forwards, floatSocial 7s ease-in-out infinite alternate;
+  transform: translateZ(50px);
+  display: flex;
+  gap: 20px;
 }
 
 #hero .social-links a {
   font-size: 24px;
-  display: inline-block;
   color: #45505b;
-  line-height: 1;
-  margin-right: 20px;
   transition: color 0.3s, transform 0.3s;
 }
 
 #hero .social-links a:hover {
   color: #0563bb;
-  transform: scale(1.1); /* Slightly scale up on hover */
+  transform: scale(1.2) rotateY(10deg);
 }
 
-/* Responsive Adjustments */
 @media (max-width: 992px) {
   #hero {
     text-align: center;
@@ -401,22 +502,212 @@ h6 {
   }
 
   #hero p {
-    margin-top: 10px;
     font-size: 20px;
     line-height: 24px;
   }
 }
 
-/* Keyframes for Animations */
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px) translateZ(50px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(50px);
   }
+}
+
+@keyframes floatTitle {
+  0% {
+    transform: translateZ(100px) translateY(0);
+  }
+  100% {
+    transform: translateZ(100px) translateY(-10px);
+  }
+}
+
+@keyframes floatSub {
+  0% {
+    transform: translateZ(70px) translateY(0);
+  }
+  100% {
+    transform: translateZ(70px) translateY(-8px);
+  }
+}
+
+@keyframes floatSocial {
+  0% {
+    transform: translateZ(50px) translateY(0);
+  }
+  100% {
+    transform: translateZ(50px) translateY(-6px);
+  }
+}
+
+/* Avatar styles */
+
+#hero {
+  width: 100%;
+  height: 100vh;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.container.hero-split {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.hero-left h1 {
+  font-size: 48px;
+  color: #222;
+}
+.hero-left p {
+  font-size: 24px;
+  color: #444;
+}
+.avatar {
+  position: relative;
+  width: 200px;
+  height: 280px;
+}
+.hood {
+  position: absolute; top: 0; left: 10px;
+  width: 180px; height: 220px;
+  background: #333;
+  border-radius: 100px / 120px;
+}
+.head {
+  position: absolute; top: 60px; left: 40px;
+  width: 120px; height: 140px;
+  background: #f1c27d;
+  border-radius: 60px / 70px;
+  z-index: 2;
+}
+.hair {
+  position: absolute; top: 0; left: 0;
+  width: 120px; height: 40px;
+  background: #222;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+}
+.ear {
+  position: absolute; top: 50px;
+  width: 20px; height: 30px;
+  background: #f1c27d;
+  border-radius: 50%;
+}
+.ear-left { left: -10px; }
+.ear-right { right: -10px; }
+.eye {
+  position: absolute; top: 55px;
+  width: 20px; height: 20px;
+  background: #fff; border-radius: 50%;
+  overflow: hidden;
+}
+.eye-left { left: 25px; }
+.eye-right { right: 25px; }
+.pupil {
+  width: 8px; height: 8px;
+  background: #000; border-radius: 50%;
+  position: absolute; top: 6px; left: 6px;
+  transition: transform 0.1s;
+}
+.nose {
+  position: absolute; top: 90px; left: 50%;
+  width: 8px; height: 16px;
+  background: #e0ac69; border-radius: 4px;
+  transform: translateX(-50%);
+}
+.mouth {
+  position: absolute; top: 120px; left: 50%;
+  width: 30px; height: 6px;
+  background: #a52a2a; border-radius: 3px;
+  transform: translateX(-50%);
+}
+.mouth-msg {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  color: red;
+  text-shadow: 1px 1px 3px #000, 0 0 5px red;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@keyframes mouth-flow {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + 200px), 0);
+    opacity: 0;
+  }
+}
+
+
+
+.mouth-words {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.mouth-word {
+  display: inline-block;
+  margin-right: 5px;
+  font-family: 'Courier New', monospace;
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+  opacity: 0;
+  text-shadow: 1px 1px 3px #000, 0 0 5px red;
+  white-space: nowrap;
+  animation: mouth-word-release 1.2s forwards;
+}
+
+@keyframes mouth-word-release {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(150px);
+    opacity: 0;
+  }
+}
+
+
+.body {
+  position: absolute; bottom: 0; left: 0;
+  width: 200px; height: 100px;
+  background: #333;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.arm {
+  position: absolute; bottom: 20px;
+  width: 60px; height: 60px;
+  background: #333;
+}
+.arm-left {
+  left: -20px; transform: rotate(45deg);
+  border-top-left-radius: 30px;
+}
+.arm-right {
+  right: -20px; transform: rotate(-45deg);
+  border-top-right-radius: 30px;
 }
 
 
@@ -424,6 +715,7 @@ h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
 
 /*--------------------------------------------------------------
 # Sections General
@@ -604,75 +896,7 @@ section {
   border-color: #333; /* Darker border on hover */
 }
 
-/* Hide Title and Description on Hover */
-.Service .hover-box:hover h3,
-.Service .hover-box:hover p,
-.Service .hover-box:hover .service-description {
-  opacity: 0;
-  transform: translateY(-20px);
-}
 
-/* Hide Logo on Hover */
-.Service .hover-box:hover img.logo {
-  opacity: 0; /* Fade out logo */
-}
-
-/* Hover Content Style */
-.Service .hover-content {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  color: #1f04ea;
-  padding: 20px;
-  transform: translateY(100%);
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  opacity: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-radius: 15px;
-  background-color: #f9f9f9; /* Match background color for consistency */
-}
-
-/* Display Hover Content on Hover */
-.Service .hover-box:hover .hover-content {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* Hover Content Title Style */
-.Service .hover-content h2 {
-  margin: 20px 0 10px;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-/* Skills List Container Style */
-.Service .hover-content .skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Space between images */
-  justify-content: center;
-}
-
-/* Skill Image Style */
-.Service .hover-content .skills img {
-  width: 60px; /* Adjust size as needed */
-  height: auto;
-  border-radius: 5px; /* Optional: rounded corners for images */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: subtle shadow */
-  transition: opacity 0.5s ease;
-}
-
-/* Blur Effect for Non-Hovered Boxes */
-.Service .box-container:hover .hover-box:not(:hover) {
-  filter: blur(4px);
-  transform: scale(0.96);
-  transition: all 0.3s ease;
-}
 
 
 /*--------------------------------------------------------------
@@ -680,141 +904,87 @@ section {
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
-# Akills
+# skills
 --------------------------------------------------------------*/
-
-
-/* Container for the section */
 #services-skills {
-  padding: 60px 0;
- 
+  padding: 70px 0;
 }
 
-/* Title styling */
-.services-skills .section-title {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.services-skills .section-title h2 {
-  font-size: 36px;
+.section-title h2 {
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 20px;
   color: #333;
 }
 
-.services-skills .section-title p {
-  font-size: 18px;
-  color: #666;
+.section-title p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* Container for service boxes */
-.services-skills .box-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-}
-
-/* Individual service box */
-.services-skills .service-box {
+.service-box {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 30px 20px;
   text-align: center;
-  width: calc(33.333% - 30px); /* Adjust width for 3 boxes per row */
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  transition: all 0.4s ease;
+  height: 100%;
 }
 
 .service-box:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-/* Service logo */
-.service-box img.service-logo {
-  width: 80px;
-  height: auto;
+.service-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid #eee;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 15px;
 }
 
-/* Service heading */
-.service-box h3 {
-  font-size: 26px;
-  margin-bottom: 15px;
-  color: #222;
+.service-box:hover .service-logo {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* Skills container */
 .skills {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
+  margin-top: 10px;
 }
 
-/* Skill box styling */
 .skill-box {
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 6px;
 }
 
-/* Skill name */
-.services-skills .skill-name {
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-  flex: 1;
+.skill-box img {
+  width: 24px;
+  height: 24px;
 }
 
-/* Progress bar wrapper */
-.services-skills .progress-bar-wrap {
-  flex: 2;
-  background: #e0e0e0;
-  border-radius: 12px;
-  height: 14px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+.skill-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-
-/* Progress bar */
-.services-skills .progress-bar {
-  height: 100%;
-  background: #4caf50;
-  color: #fff;
-  text-align: center;
-  line-height: 14px;
-  border-radius: 12px;
-  transition: width 0.4s ease, background-color 0.3s ease;
-  font-size: 14px;
-}
-
-/* Hover effect on progress bar */
-.services-skills .progress-bar-wrap:hover .progress-bar {
-  background-color: #45a049; /* Darker shade for hover */
-}
-
-/* Specific styling for each service */
-.services-skills .teamcenter .progress-bar {
-  background: #007acc;
-}
-
-.services-skills .web-design .progress-bar {
-  background: #f44336;
-}
-
-.services-skills .web-development .progress-bar {
-  background: #ff9800;
-}
-
-.services-skills .programming .progress-bar {
-  background: #3f51b5;
-}
-
-
-
 
 
 /*--------------------------------------------------------------
