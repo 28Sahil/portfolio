@@ -63,33 +63,80 @@
   <!------------------------------------------------------
    start  hero 
    ------------------------------------------------------>
-
-  <section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="container" data-aos="zoom-in" data-aos-delay="100">
-      <h1>Sahil Kadu</h1>
-      <p>I'm <span class="typed" data-typed-items="Designer, Developer"></span></p>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/sahil-kadu-277464267/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-
-        <a href="https://www.facebook.com/sahil.kadu.9235?mibextid=ZbWKwL" class="facebook"><i
-            class="bx bxl-facebook"></i></a>
-        <a href="https://instagram.com/sahil.kadu.28?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D" class="instagram"><i
-            class="bx bxl-instagram"></i></a>
-
-        <a href="./Sahil_kadu-Resume.pdf">
-          <p>D</p>
-        </a>
-
+   <section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container hero-split" data-aos="zoom-in" data-aos-delay="100">
+  
+      <div class="hero-left">
+        <h1>Sahil Kadu</h1>
+        <p>I'm <span class="typed" data-typed-items="Designer, Developer"></span></p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/sahil-kadu-277464267/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://www.facebook.com/sahil.kadu.9235?mibextid=ZbWKwL" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://instagram.com/sahil.kadu.28?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="./Sahil_kadu-Resume.pdf" class="instagram"><i class="bx bx-download"></i></a>
+        </div>
       </div>
+  
+      <div class="avatar" id="avatar">
+        <div class="hood"></div>
+        <div class="head">
+          <div class="hair"></div>
+          <div class="ear ear-left"></div>
+          <div class="ear ear-right"></div>
+          <div class="eye eye-left"><div class="pupil"></div></div>
+          <div class="eye eye-right"><div class="pupil"></div></div>
+          <div class="nose"></div>
+          <div class="mouth"></div>
+          <div class="mouth-msg" id="mouth-msg">MY EYES ON YOU</div>
+        </div>
+        <div class="body">
+          <div class="arm arm-left"></div>
+          <div class="arm arm-right"></div>
+        </div>
+      </div>
+
     </div>
+      
+      
+  
+  
+  
+    
+      
+  </section>
+  <script>
+    const hero = document.getElementById('hero');
+    const avatar = document.getElementById('avatar');
+    const pupils = avatar.querySelectorAll('.pupil');
+    const mouthMsg = document.getElementById('mouth-msg');
+    
+    // Eye follows mouse
+    document.addEventListener('mousemove', (e) => {
+      const rect = avatar.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      
+      pupils.forEach(p => {
+        p.style.transform = `translate(${dx * 0.02}px, ${dy * 0.02}px)`;
+      });
+    });
+    
+    // Mouth message flow on click
+    hero.addEventListener('click', () => {
+      mouthMsg.style.opacity = '1';
+      mouthMsg.style.animation = 'mouth-flow 2s linear forwards';
+    
+      setTimeout(() => {
+        mouthMsg.style.animation = '';
+        mouthMsg.style.opacity = '0';
+      }, 2000);
+    });
+    </script>
+    
+    
 
     
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  </section>
-
-
+    
 
   <main id="main">
 
@@ -133,7 +180,7 @@
                   <li><i class="bi bi-chevron-right"></i> <strong>Name</strong> <span>Sahil kadu</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>28 Nov 2000</span></li>
 
-                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>23</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>25</span></li>
                   <!-- <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li> -->
                 </ul>
                 <ul>
@@ -144,10 +191,6 @@
                   <li><i class="bi bi-chevron-right"></i> <strong>Resume:</strong> <span><a
                         href="./Sahil_kadu-Resume.pdf">Resume</a></span></li>
 
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
                   <!-- <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor of Engineering </span></li> -->
                   <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>kadu.sahil.mail@gmail.com</span>
                   </li>
@@ -188,65 +231,25 @@
           <img src="https://shorturl.at/gej8C" alt="Teamcenter Logo" class="logo">
           <h3>Teamcenter</h3>
           <p class="service-description">Efficient PLM Solutions for streamlined product lifecycle management.</p>
-          <div class="hover-content">
-            <h2>Teamcenter Skills</h2>
-            <div class="skills">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 1">
-              <img src="https://rb.gy/t577or" alt="Skill Image 2">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 3">
-              <img src="https://rb.gy/t577or" alt="Skill Image 4">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 5">
-              <img src="https://rb.gy/t577or" alt="Skill Image 6">
-            </div>
-          </div>
+          
         </div>
         <div class="hover-box">
           <img src="https://shorturl.at/C3wns" alt="Web Design Logo" class="logo">
           <h3>Web Design</h3>
           <p class="service-description">Creative and responsive designs to elevate your online presence.</p>
-          <div class="hover-content">
-            <h2>Web Design Skills</h2>
-            <div class="skills">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 1">
-              <img src="https://rb.gy/t577or" alt="Skill Image 2">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 3">
-              <img src="https://rb.gy/t577or" alt="Skill Image 4">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 5">
-              <img src="https://rb.gy/t577or" alt="Skill Image 6">
-            </div>
-          </div>
+          
         </div>
         <div class="hover-box">
           <img src="https://shorturl.at/I7F8H" alt="Web Development Logo" class="logo">
           <h3>Web Development</h3>
           <p class="service-description">Robust and scalable solutions to meet your development needs.</p>
-          <div class="hover-content">
-            <h2>Web Development Skills</h2>
-            <div class="skills">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 1">
-              <img src="https://rb.gy/t577or" alt="Skill Image 2">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 3">
-              <img src="https://rb.gy/t577or" alt="Skill Image 4">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 5">
-              <img src="https://rb.gy/t577or" alt="Skill Image 6">
-            </div>
-          </div>
+         
         </div>
         <div class="hover-box">
           <img src="https://shorturl.at/yQfzf" alt="Programming Logo" class="logo">
           <h3>Programming</h3>
           <p class="service-description">Efficient coding solutions tailored to your needs.</p>
-          <div class="hover-content">
-            <h2>Programming Skills</h2>
-            <div class="skills">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 1">
-              <img src="https://rb.gy/t577or" alt="Skill Image 2">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 3">
-              <img src="https://rb.gy/t577or" alt="Skill Image 4">
-              <img src="https://shorturl.at/aRfaY" alt="Skill Image 5">
-              <img src="https://rb.gy/t577or" alt="Skill Image 6">
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
@@ -264,151 +267,110 @@
     <!------------------------------------------------------
    strt Skill 
    ------------------------------------------------------>
-   <section id="services-skills" class="services-skills">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
+   <section id="services-skills">
+    <div class="container">
+      <div class="section-title text-center mb-5">
         <h2>Skills by Service</h2>
         <p>Explore the skills associated with each of our services, demonstrating our expertise in various areas.</p>
       </div>
-
-      <div class="box-container">
-        <!-- Teamcenter Service -->
-        <div class="service-box">
-          <img src="https://shorturl.at/gej8C" alt="Teamcenter Logo" class="service-logo">
-          <h3>Teamcenter</h3>
-        
-          <div class="skills">
-            <div class="skill-box">
-              <span class="skill-name">Teamcenter</span>
-              <div class="progress-bar-wrap teamcenter">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
+  
+      <!-- Top 3 services -->
+      <div class="row g-4">
+        <!-- Teamcenter -->
+        <div class="col-md-6 col-lg-4">
+          <div class="service-box">
+            <img src="https://shorturl.at/gej8C" alt="Teamcenter Logo" class="service-logo">
+            <h3>Teamcenter</h3>
+            <div class="skills">
+              <div class="skill-box">
+                <span style="font-size: 1.2rem;">🛠️</span>
+                Teamcenter
               </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">BMIDE</span>
-              <div class="progress-bar-wrap teamcenter">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
+              <div class="skill-box">
+                <span style="font-size: 1.2rem;">📐</span>
+                BMIDE
               </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">TTK</span>
-              <div class="progress-bar-wrap teamcenter">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">Data Management</span>
-              <div class="progress-bar-wrap teamcenter">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">90%</div>
+              <div class="skill-box">
+                <span style="font-size: 1.2rem;">💻</span>
+                ITK
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Web Design Service -->
-        <div class="service-box">
-          <img src="https://shorturl.at/C3wns" alt="Web Design Logo" class="service-logo">
-          <h3>Web Design</h3>
-          <div class="skills">
-            <div class="skill-box">
-              <span class="skill-name">HTML</span>
-              <div class="progress-bar-wrap web-design">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+  
+        <!-- Web Development -->
+        <div class="col-md-6 col-lg-4">
+          <div class="service-box">
+            <img src="https://shorturl.at/I7F8H" alt="React Logo" class="service-logo">
+            <h3>Web Development</h3>
+            <div class="skills">
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript">
+                JavaScript
               </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">CSS</span>
-              <div class="progress-bar-wrap web-design">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+              <div class="skill-box">
+                <img src="https://nodejs.org/static/images/logo.svg" alt="Node.js">
+                Node.js
               </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">JavaScript</span>
-              <div class="progress-bar-wrap web-design">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+              <div class="skill-box">
+                <img src="https://www.php.net/images/logos/php-logo.svg" alt="PHP">
+                PHP
               </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">ReactJS</span>
-              <div class="progress-bar-wrap web-design">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">Responsive Design</span>
-              <div class="progress-bar-wrap web-design">
-                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;">85%</div>
+              <div class="skill-box">
+                <img src="https://lnk.ink/3NqKG" alt="MySQL">
+                MySQL
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Web Development Service -->
-        <div class="service-box">
-          <img src="https://shorturl.at/I7F8H" alt="Web Development Logo" class="service-logo">
-          <h3>Web Development</h3>
-         
-          <div class="skills">
-            <div class="skill-box">
-              <span class="skill-name">PHP</span>
-              <div class="progress-bar-wrap web-development">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">75%</div>
+  
+        <!-- Programming -->
+        <div class="col-md-6 col-lg-4">
+          <div class="service-box">
+            <img src="https://lnk.ink/6v1qb" alt="Programming Logo" class="service-logo">
+            <h3>Programming</h3>
+            <div class="skills">
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg" alt="C++">
+                C++
               </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">Laravel</span>
-              <div class="progress-bar-wrap web-development">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">75%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">Node.js</span>
-              <div class="progress-bar-wrap web-development">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">75%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">Express.js</span>
-              <div class="progress-bar-wrap web-development">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">75%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Programming Service -->
-        <div class="service-box">
-          <img src="https://shorturl.at/owxD4" alt="Programming Logo" class="service-logo">
-          <h3>Programming</h3>
-          
-          <div class="skills">
-            <div class="skill-box">
-              <span class="skill-name">Python</span>
-              <div class="progress-bar-wrap programming">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">Java</span>
-              <div class="progress-bar-wrap programming">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">C++</span>
-              <div class="progress-bar-wrap programming">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
-              </div>
-            </div>
-            <div class="skill-box">
-              <span class="skill-name">C#</span>
-              <div class="progress-bar-wrap programming">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python">
+                Python
               </div>
             </div>
           </div>
         </div>
       </div>
+  
+      <!-- Centered Web Design service -->
+      <div class="row justify-content-center g-4 mt-2">
+        <div class="col-md-6 col-lg-4">
+          <div class="service-box">
+            <img src="https://shorturl.at/C3wns" alt="Web Design Logo" class="service-logo">
+            <h3>Web Design</h3>
+            <div class="skills">
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML">
+                HTML
+              </div>
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS">
+                CSS
+              </div>
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap">
+                Bootstrap
+              </div>
+              <div class="skill-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React">
+                React
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
     </div>
   </section>
   
@@ -449,6 +411,20 @@ start resume
                 <li>Customized and optimized Teamcenter workflows to enhance system performance and user efficiency, resulting in improved process automation and reduced manual effort.</li>
                 <li>Utilized and configured key Teamcenter modules, including Structure Manager and Workflow, to optimize product data management and process efficiency.</li>
                 <li>Provided expert technical support and training to end-users, resolving complex issues and ensuring the efficient use of Teamcenter features and tools.</li>
+
+
+              </ul>
+            </div>
+
+            <div class="resume-item">
+              <h4>MERN Stack </h4>
+              <h5>Student Internship </h5> <br>
+              <h5>06/2023 - 02/2024</h5>
+              <p><em>Zidio Development – Remote </em></p>
+              <ul>
+                <li>During my student internship, I gained hands-on experience in web development using React. I worked on building and maintaining user interfaces, managing state with hooks, and integrating APIs to fetch and display data. This experience enhanced my skills in JavaScript, component-based architecture, and responsive design, and allowed me to collaborate effectively within a team setting.</li>
+                
+                
 
 
               </ul>
